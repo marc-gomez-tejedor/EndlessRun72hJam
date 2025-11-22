@@ -11,6 +11,7 @@ public class TestSpawner : MonoBehaviour
 
     private void Awake()
     {
+        ChangeSize(size);
         _objectToSpawn = objectsToChoose[0];
         time = 0f;
     }
@@ -31,6 +32,7 @@ public class TestSpawner : MonoBehaviour
     public void ChangeSize(float s)
     {
         size = s;
-        _objectToSpawn.transform.localScale = Vector3.one * size;
+        for (int i = 0; i < objectsToChoose.Length; i++)
+        { objectsToChoose[i].transform.localScale = Vector3.one * size; }
     }
 }
