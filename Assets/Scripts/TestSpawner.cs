@@ -4,7 +4,7 @@ public class TestSpawner : MonoBehaviour
 {
     GameObject _objectToSpawn;
     float time;
-    float size = 0.5f;
+    float size = 1f;
 
     [SerializeField]
     GameObject[] objectsToChoose;
