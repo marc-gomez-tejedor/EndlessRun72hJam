@@ -17,7 +17,7 @@ public class DestroyAfterTimer : MonoBehaviour
         if (timer <= 0f)
         {
             //Destroy(gameObject);
-            NewObjectPoolManager.ReturnObjectToPool(gameObject);
+            NewObjectPoolManager.ReturnObjectToPool(gameObject, NewObjectPoolManager.PoolType.ParticleSystems);
         }
     }
 }

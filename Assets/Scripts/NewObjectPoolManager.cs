@@ -64,6 +64,19 @@ public class NewObjectPoolManager : MonoBehaviour
         _objectPools.Add(prefab, pool);
     }
 
+    static void CreatePool(GameObject prefab, Transform parent, Quaternion rot, PoolType poolType = PoolType.GameObjects)
+    {
+        ObjectPool<GameObject> pool = new ObjectPool<GameObject>
+        (
+            createFunc: () => CreateObject(prefab, parent, rot, poolType),
+            actionOnGet: OnGetObject,
+            actionOnRelease: OnReleaseObject,
+            actionOnDestroy: OnDestroyObject
+        );
+
+        _objectPools.Add(prefab, pool);
+    }
+
     static GameObject CreateObject(GameObject prefab, Vector3 pos, Quaternion rot, PoolType poolType = PoolType.GameObjects)
     {
         prefab.SetActive(false);
@@ -74,6 +87,21 @@ public class NewObjectPoolManager : MonoBehaviour
 
         GameObject parentObject = SetParentObject(poolType);
         obj.transform.SetParent(parentObject.transform);
+
+        return obj;
+    }
+
+    static GameObject CreateObject(GameObject prefab, Transform parent, Quaternion rot, PoolType poolType = PoolType.GameObjects)
+    {
+        prefab.SetActive(false);
+
+        GameObject obj = Instantiate(prefab, parent);
+
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = rot;
+        obj.transform.localScale = Vector3.one;
+
+        obj.SetActive(true);
 
         return obj;
     }
@@ -158,15 +186,66 @@ public class NewObjectPoolManager : MonoBehaviour
 
         return null;
     }
+    static T SpawnObject<T>(GameObject objectToSpawn, Transform parent, 
+        Quaternion spawnRot, PoolType poolType = PoolType.GameObjects) where T : Object
+    {
+        if (!_objectPools.ContainsKey(objectToSpawn))
+        {
+            CreatePool(objectToSpawn, parent, spawnRot, poolType);
+        }
+
+        GameObject obj = _objectPools[objectToSpawn].Get();  /*if there is an obj in the pool it will reactivate it
+        if there is not, it will instantiate it for us (unityEngine.Pool.Get method)*/
+
+        if (obj != null)
+        {
+            if (!_cloneToPrefabMap.ContainsKey(obj))
+            {
+                _cloneToPrefabMap.Add(obj, objectToSpawn);
+            }
+
+            obj.transform.SetParent(parent);
+            obj.transform.localPosition = Vector3.zero;
+            obj.transform.localRotation = spawnRot;
+            obj.SetActive(true);
+
+            if (typeof(T) == typeof(GameObject))
+            {
+                return obj as T;
+            }
+
+            // if its not a gameObject its a component so we do getComponent
+            T component = obj.GetComponent<T>();
+            if (component == null)
+            {
+                Debug.LogError($"Object {objectToSpawn.name} doesn't have component of type {typeof(T)}");
+                return null;
+            }
+
+            return component;
+        }
+
+        return null;
+    }
 
     public static T SpawnObject<T>(T typePrefab, Vector3 spawnPos, Quaternion spawnRot, PoolType poolType = PoolType.GameObjects) where T : Component
     {
         return SpawnObject<T>(typePrefab.gameObject, spawnPos, spawnRot, poolType);
     }
 
+    public static T SpawnObject<T>(T typePrefab, Transform parent, Quaternion spawnRot, PoolType poolType = PoolType.GameObjects) where T : Component
+    {
+        return SpawnObject<T>(typePrefab.gameObject, parent, spawnRot, poolType);
+    }
+
     public static GameObject SpawnObject(GameObject objectToSpawn, Vector3 spawnPos, Quaternion spawnRot, PoolType poolType = PoolType.GameObjects)
     {
         return SpawnObject<GameObject>(objectToSpawn, spawnPos, spawnRot, poolType);
+    }
+
+    public static GameObject SpawnObject(GameObject objectToSpawn, Transform parent, Quaternion spawnRot, PoolType poolType = PoolType.GameObjects)
+    {
+        return SpawnObject<GameObject>(objectToSpawn, parent, spawnRot, poolType);
     }
 
     public static void ReturnObjectToPool(GameObject obj, PoolType poolType = PoolType.GameObjects)

@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class TestSpawner : MonoBehaviour
 {
+    //[SerializeField]
+    //GameObject _objectToSpawn;
+
     [SerializeField]
-    GameObject _objectToSpawn;
+    Rigidbody _objectToSpawn;
+    [SerializeField]
+    Transform _parent;
 
     private void Update()
     {
@@ -12,7 +17,10 @@ public class TestSpawner : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 pos = ray.origin + ray.direction * 15f;
             //Instantiate(_objectToSpawn, pos, Quaternion.identity);
-            NewObjectPoolManager.SpawnObject(_objectToSpawn, pos, Quaternion.identity);
+            //NewObjectPoolManager.SpawnObject(_objectToSpawn, pos, Quaternion.identity);
+            //Rigidbody rb = NewObjectPoolManager.SpawnObject(_objectToSpawn, pos, Quaternion.identity, NewObjectPoolManager.PoolType.ParticleSystems);
+            Rigidbody rb = NewObjectPoolManager.SpawnObject(_objectToSpawn, _parent, Quaternion.identity, NewObjectPoolManager.PoolType.ParticleSystems);
+            rb.useGravity = true;
         }
     }
 }

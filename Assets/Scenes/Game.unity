@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &419358609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 419358610}
+  m_Layer: 0
+  m_Name: SpawnTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &419358610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419358609}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &587014649
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51a9e126be804404bbb0cc9cfa7dd042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestSpawner
-  _objectToSpawn: {fileID: 3071849069691858898, guid: cb86b1bcb6329be4281e1c2042802cd3, type: 3}
+  _objectToSpawn: {fileID: -5822876186242360126, guid: 809f3a3c8db8c1e45be5ce7ba0b7f7f1, type: 3}
+  _parent: {fileID: 0}
 --- !u!114 &587014651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,3 +449,4 @@ SceneRoots:
   - {fileID: 2068174986}
   - {fileID: 2085477055}
   - {fileID: 587014652}
+  - {fileID: 419358610}
