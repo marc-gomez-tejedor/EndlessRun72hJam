@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DestroyAfterTimer : MonoBehaviour
 {
-    const float TIME_TO_DESPAWN = 1f;
+    const float TIME_TO_DESPAWN = 2.5f;
     float timer;
 
     void OnEnable()
@@ -16,7 +16,8 @@ public class DestroyAfterTimer : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0f)
         {
-            ObjectPoolManager.ReturnObjectToPool(gameObject);
+            Destroy(gameObject);
+            //ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
     }
 }
