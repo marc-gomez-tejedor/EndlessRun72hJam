@@ -16,8 +16,8 @@ public class DestroyAfterTimer : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0f)
         {
-            Destroy(gameObject);
-            //ObjectPoolManager.ReturnObjectToPool(gameObject);
+            //Destroy(gameObject);
+            NewObjectPoolManager.ReturnObjectToPool(gameObject);
         }
     }
 }

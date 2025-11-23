@@ -10,7 +10,9 @@ public class TestSpawner : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Instantiate(_objectToSpawn, ray.origin+ray.direction*15f, Quaternion.identity);
+            Vector3 pos = ray.origin + ray.direction * 15f;
+            //Instantiate(_objectToSpawn, pos, Quaternion.identity);
+            NewObjectPoolManager.SpawnObject(_objectToSpawn, pos, Quaternion.identity);
         }
     }
 }
