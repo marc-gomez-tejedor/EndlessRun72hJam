@@ -6,52 +6,32 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField]
     BulletConfigSO configSO;
 
-    float bulletSpeed, bulletDamage, destroyTime;
+    float bulletSpeed, bulletDamage, timer;
     LayerMask destroyBulletLayerMask;
-
-    Coroutine _returnToPoolTimerCoroutine;
-
-    void Awake()
-    {
-    }
+    [SerializeField]
+    Rigidbody rb;
 
     void OnEnable()
     {
-        bulletSpeed = configSO.speed;
-        bulletDamage = configSO.damage;
-        destroyTime = configSO.destroyTime;
-        destroyBulletLayerMask = configSO.destroysBulletMask;
-
-        SetDestroTime();
         InitializeBulletStats();
-
-        _returnToPoolTimerCoroutine = StartCoroutine(ReturnToPoolAfterTime());    
     }
-    void FixedUpdate()
+    void Update()
     {
-         
-    }
-
-    IEnumerator ReturnToPoolAfterTime()
-    {
-        float elapsedTime = 0f;
-        while (elapsedTime < destroyTime)
+        timer -= Time.deltaTime;
+        if (timer <= 0f)
         {
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            //Destroy(gameObject);
+
+            ReturnToPool();
         }
-
-        ObjectPoolManager.ReturnObjectToPool(gameObject);
     }
-
-    void SetDestroTime()
-    {
-
-    }
-
     void InitializeBulletStats()
     {
-
+        bulletSpeed = configSO.speed;
+        rb.linearVelocity = Vector3.forward * bulletSpeed;
+        bulletDamage = configSO.damage;
+        timer = configSO.destroyTime;
+        destroyBulletLayerMask = configSO.destroysBulletMask;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,7 +53,13 @@ public class BulletBehavior : MonoBehaviour
 
 
             // destroy bullet
-            ObjectPoolManager.ReturnObjectToPool(gameObject);
+            ReturnToPool();
         }
+    }
+
+    void ReturnToPool()
+    {
+        rb.linearVelocity = Vector3.zero;
+        NewObjectPoolManager.ReturnObjectToPool(gameObject);
     }
 }

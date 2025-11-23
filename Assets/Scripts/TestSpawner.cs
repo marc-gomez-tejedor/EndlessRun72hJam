@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class TestSpawner : MonoBehaviour
 {
-    //[SerializeField]
-    //GameObject _objectToSpawn;
-
     [SerializeField]
     Rigidbody _objectToSpawn;
     [SerializeField]
-    Transform _parent;
+    Transform spawnPoint;
+
+    [SerializeField]
+    float timeBetweenBullets;
+    float timer;
+
+    private void Awake()
+    {
+        timer = timeBetweenBullets;
+    }
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        timer -= Time.deltaTime;
+        if (timer <= 0f)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 pos = ray.origin + ray.direction * 15f;
-            //Instantiate(_objectToSpawn, pos, Quaternion.identity);
-            //NewObjectPoolManager.SpawnObject(_objectToSpawn, pos, Quaternion.identity);
-            //Rigidbody rb = NewObjectPoolManager.SpawnObject(_objectToSpawn, pos, Quaternion.identity, NewObjectPoolManager.PoolType.ParticleSystems);
-            Rigidbody rb = NewObjectPoolManager.SpawnObject(_objectToSpawn, _parent, Quaternion.identity, NewObjectPoolManager.PoolType.ParticleSystems);
-            rb.useGravity = true;
+            timer = timeBetweenBullets;
+            Vector3 pos = spawnPoint.position;
+            Rigidbody rb = NewObjectPoolManager.SpawnObject(_objectToSpawn, pos, Quaternion.identity);
         }
     }
 }
