@@ -7,13 +7,11 @@ public class TestSpawner : MonoBehaviour
     [SerializeField]
     Transform spawnPoint;
 
-    [SerializeField]
-    float timeBetweenBullets;
     float timer;
 
     private void Awake()
     {
-        timer = timeBetweenBullets;
+        timer = PlayerController.bulletSpawnTimer;
     }
 
     private void Update()
@@ -21,7 +19,7 @@ public class TestSpawner : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0f)
         {
-            timer = timeBetweenBullets;
+            timer = PlayerController.bulletSpawnTimer;
             Vector3 pos = spawnPoint.position;
             Rigidbody rb = NewObjectPoolManager.SpawnObject(_objectToSpawn, pos, Quaternion.identity);
         }

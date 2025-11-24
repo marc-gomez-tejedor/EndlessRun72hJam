@@ -6,7 +6,7 @@ public class TerrainController : MonoBehaviour
     GameObject[] platforms;
 
     [SerializeField]
-    Vector3 dz = new Vector3(0f, 0f, 0.1f);
+    public static Vector3 dz = new Vector3(0f, 0f, 5f);
     Vector3 zDif = new Vector3(0f, 0f, 90f);
 
     void FixedUpdate()

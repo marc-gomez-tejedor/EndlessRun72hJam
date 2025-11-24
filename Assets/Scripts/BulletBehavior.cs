@@ -3,11 +3,9 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
-    [SerializeField]
-    BulletConfigSO configSO;
-
     float bulletSpeed, bulletDamage, timer;
     LayerMask destroyBulletLayerMask;
+
     [SerializeField]
     Rigidbody rb;
 
@@ -27,11 +25,11 @@ public class BulletBehavior : MonoBehaviour
     }
     void InitializeBulletStats()
     {
-        bulletSpeed = configSO.speed;
+        bulletSpeed = PlayerController.bulletSpeed;
         rb.linearVelocity = Vector3.forward * bulletSpeed;
-        bulletDamage = configSO.damage;
-        timer = configSO.destroyTime;
-        destroyBulletLayerMask = configSO.destroysBulletMask;
+        bulletDamage = PlayerController.bulletDamage;
+        timer = PlayerController.bulletDespawnTimer;
+        destroyBulletLayerMask = PlayerController.DestroyBulletLayerMask;
     }
 
     private void OnTriggerEnter(Collider other)
