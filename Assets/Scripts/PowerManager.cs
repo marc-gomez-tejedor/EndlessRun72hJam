@@ -71,20 +71,25 @@ public class PowerManager : MonoBehaviour
     }
     void PowerCreep()
     {
-        nextMultiplierGap = multiplierTopBoost * Random.Range(0.5f, 2f);
+        //nextMultiplierGap = multiplierTopBoost * Random.Range(0.5f, 2f);
         int p = PlayerController.GetNewCharactersCountIncreased(ref nextMultiplierGap);
-        int n = Random.Range(1, 4);
+        int n, m=4;
+        if (nextMultiplierGap > multiplierTopBoost*multiplierTopBoost)
+        {
+            m = 3;
+        }
+        n = Random.Range(1, 4);
         nextAlliesBoost = 0;
         nextCadenceBoost = 0;
         nextDamageBoost = 1f;
         s = Random.Range(1, 3); // 1 strong left, 2 strong right
-        if (n == 1)
+        if (n == 3)
         {
             nextAlliesBoost = p - PlayerController.characters.Count;
             strong = BoostType.Number;
             strongN = nextAlliesBoost;
 
-            n = Random.Range(1, 3);
+            n = Random.Range(1, m-1);
             if (n == 1)
             {
                 nextCadenceBoost = PlayerController.bulletSpawnTimer - PlayerController.GetNewSpawnTimerIncreased(nextMultiplierGap * 0.5f);
@@ -104,26 +109,26 @@ public class PowerManager : MonoBehaviour
             strong = BoostType.Cadence;
             nextCadenceBoost = PlayerController.bulletSpawnTimer - PlayerController.GetNewSpawnTimerIncreased(nextMultiplierGap*2f);
             strongN = nextCadenceBoost;
-            n = Random.Range(1, 3);
-            if (n == 1)
+            n = Random.Range(1, m-1);
+            if (n == 2)
             {
                 weak = BoostType.Number;
                 nextAlliesBoost = p - PlayerController.characters.Count;
                 weakN = nextAlliesBoost;
             }
-            else if (n == 2)
+            else if (n == 1)
             {
                 weak = BoostType.Damage;
                 nextDamageBoost = PlayerController.bulletDamage * nextMultiplierGap / PlayerController.bulletDamage;
                 weakN = nextDamageBoost;
             }
         }
-        else if (n == 3)
+        else if (n == 1)
         {
             strong = BoostType.Damage;
             nextDamageBoost = PlayerController.bulletDamage * nextMultiplierGap / PlayerController.bulletDamage;
             strongN = nextDamageBoost;
-            n = Random.Range(1, 3);
+            n = Random.Range(1, m - 1);
             if (n == 1)
             {
                 weak = BoostType.Cadence;

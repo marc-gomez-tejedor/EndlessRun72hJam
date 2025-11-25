@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     public static float bulletSpeed = 20f;
     public static float bulletDespawnTimer = 3f;
-    public static float bulletSpawnTimer = 0.2f;
+    public static float bulletSpawnTimer = 1f;
     public static float bulletDamage = 1f;
     public static LayerMask DestroyBulletLayerMask;
 

@@ -151,8 +151,8 @@ GameObject:
   - component: {fileID: 8401750564588022091}
   - component: {fileID: 7638854660317849877}
   - component: {fileID: 7722650349285150476}
-  - component: {fileID: 8539744068171760056}
   - component: {fileID: 101759708954112676}
+  - component: {fileID: 3563668890857514096}
   m_Layer: 10
   m_Name: DamageBoost
   m_TagString: Untagged
@@ -473,28 +473,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6473783009277271610}
   m_Mesh: {fileID: 0}
---- !u!64 &8539744068171760056
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6473783009277271610}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &101759708954112676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,6 +486,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boost
   selftText: {fileID: 4768346647287567749}
+--- !u!65 &3563668890857514096
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6473783009277271610}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7266589809051270284
 GameObject:
   m_ObjectHideFlags: 0

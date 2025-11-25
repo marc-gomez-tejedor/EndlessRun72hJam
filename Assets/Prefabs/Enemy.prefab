@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4060723026159541844}
   - component: {fileID: 7031423966260349689}
   - component: {fileID: 3610537968887726734}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Hp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280291161
-  m_fontColor: {r: 0.34901962, g: 0.058823533, b: 0.1254902, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.5
-  m_fontSizeBase: 0.5
+  m_fontSize: 1
+  m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 2706623092005172127}
   - component: {fileID: 3261224367334186474}
   - component: {fileID: 5819533578091493880}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8820,7 +8820,7 @@ GameObject:
   - component: {fileID: 995269439199535610}
   - component: {fileID: 3341419195064473305}
   - component: {fileID: 1513895391361734973}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
